@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIỚI THIỆU BẢN THÂN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --tet-red: #d43b40;
+            --tet-gold: #ffcc00;
+            --tet-orange: #ff8c00;
+            --tet-pink: #ff69b4;
+            --text-black: #000000;
+            --bg-overlay: rgba(255, 255, 255, 0.9);
+        }
+
+        /* LỚP 1: ẢNH NỀN TẾT */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://static.vinwonders.com/production/cay-thong-mua-giang-sinh-10.jpg'); /* Giữ ảnh nền cũ tạm thời, hoặc thay bằng ảnh không khí Tết */
+            background-image: url('https://i.pinimg.com/originals/99/65/d6/9965d6c8230b021300903823ec9d9365.jpg'); /* Ảnh không khí Tết */
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            overflow-x: hidden;
+            color: var(--text-black);
+        }
+
+        /* LỚP 2: HOA BAY LƠ LỬNG */
+        #flower-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .flower-petal {
+            position: absolute;
+            font-size: 20px; /* Kích thước cánh hoa */
+            opacity: 0.7;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotateZ(0deg); opacity: 0.8; }
+            100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
+        }
+
+        /* LỚP 3: NỘI DUNG */
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh; /* Đảm bảo wrapper đủ cao để nội dung không bị trôi */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 2px solid var(--tet-red);
+        }
+
+        header h1 {
+            color: var(--tet-red);
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .title-intro {
+            font-size: 16px;
+            color: var(--text-black);
+            margin-top: 10px;
+            font-weight: normal;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: var(--bg-overlay); /* Lớp phủ cho nội dung */
+            backdrop-filter: blur(3px); /* Hiệu ứng làm mờ nền */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        /* MENU ACCORDION */
+        .accordion-item {
+            background: #ffffff;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-right: 8px solid var(--tet-red); /* Cạnh viền đỏ highlight */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .accordion-header {
+            padding: 18px 25px;
+            font-size: 16px;
+            color: var(--text-black);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            font-weight: normal;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .accordion-item.active .accordion-header {
+            background: var(--tet-red);
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 25px;
+            border-top: 1px solid #eee;
+            background: #fffdfb;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        /* ĐỊNH DẠNG NỘI DUNG CHI TIẾT */
+        .section-title {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--tet-red); /* Tiêu đề lớn màu đỏ Tết */
+            margin-bottom: 20px;
+            border-bottom: 2px dashed var(--tet-gold);
+            padding-bottom: 10px;
+            display: block;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            font-size: 16px;
+            color: var(--text-black);
+            line-height: 1.8;
+        }
+        .info-list li b { color: var(--tet-red); }
+
+        .hobby-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-black);
+            margin: 15px 0 10px 0;
+            display: block;
+        }
+
+        .normal-text {
+            font-size: 16px;
+            color: var(--text-black);
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        .normal-text a {
+            color: var(--tet-red);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .normal-text a:hover {
+            text-decoration: underline;
+        }
+
+        .quote-italic {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-black);
+        }
+
+        .decision-quote {
+            font-size: 20px;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--tet-red);
+            text-align: center;
+            display: block;
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .img-item {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .img-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid var(--tet-gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .img-caption {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.8);
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="flower-container"></div>
+
+    <div class="main-wrapper">
+        <header>
+            <h1>GIỚI THIỆU BẢN THÂN</h1>
+            <div class="title-intro">Chao xìn, Bùi Đức Mạnh-lớp 12A4 xin được giới thiệu!</div>
+        </header>
+
+        <div class="container">
+            <div class="accordion-item">
+                <div class="accordion-header">Thông tin cơ bản <i class="fas fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <span class="section-title">1. Thông tin cơ bản</span>
+                    <ul class="info-list">
+                        <li>· Họ và tên: Bùi Đức Mạnh</li>
+                        <li>· Ngày sinh: 04/01/2008</li>
+                        <li>· Nghề nghiệp: Học sinh</li>
+                        <li>· Trường: THPT Hòn Gai</li>
+                        <li>· Gmail: laughfoxmanh@gmail.com</li>
+                        <li>· Số điện thoại: 0344627996</li>
+                        <li>· Facebook: <a href="https://www.facebook.com/share/1DCwVKM9wu/" target="_blank">Tại đây</a></li>
+                        <li>· Cách tôi hồi phục năng lượng: Dành thời gian bên bạn ấy.</li>
+                        <li class="quote-italic">· Câu nói tâm đắc: "Cuộc sống nên biết hài lòng, cái gì là của mình thì chắc chắn là của mình, cái gì không phải của mình thì giật lấy đến kiệt sức mới thôi."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">Sở thích <i class="fas fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <span class="section-title">2. Sở thích</span>
+                    <span class="hobby-title">🎈 Đi chơi & Skinship 🚶‍♂️✨</span>
+                    <p class="normal-text"><b>Đi chơi:</b> Tận hưởng những chuyến đi để khám phá thế giới xung quanh và nạp lại năng lượng tích cực.</p>
+<div style="text-align: center; background: #f0f0f0; padding: 20px;">
+    <video width="360" controls style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <source src="Download (30).mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ xem video này.
+    </video>
+    <p>Nguồn: TikTok @kazenix</p>
+</div>
+                    <p class="normal-text"><b>Thích được khen & Skinship:</b> Tôi trân trọng những lời tán thưởng và những cử chỉ thân thiết, đó là ngôn ngữ tình cảm giúp tôi cảm thấy hạnh phúc và gắn kết hơn với mọi người.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">Hành trình tri thức và tư duy <i class="fas fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <span class="section-title">3. Hành trình tri thức và tư duy</span>
+                    <p class="normal-text"><b>Tư duy Toán học:</b> Tôi sở hữu tư duy Toán học tốt, không chỉ dừng lại ở tài năng mà còn là sự say mê đặc biệt với những bài tập khó. Đối với các dạng bài dễ gặp nhiều lần, tôi thường tự khái quát cách làm trong đầu để nhanh chóng chuyển sang chinh phục những bài toán mang tính thử thách cao hơn.</p>
+                    <p class="normal-text"><b>Sở thích giảng bài:</b> Tôi có niềm vui khi đi giảng giải kiến thức cho các bạn khác. Điều này không chỉ giúp bạn tiến bộ mà còn giúp tôi củng cố lại tư duy của chính mình.</p>
+                    <p class="normal-text"><b>Bản lĩnh trước thử thách:</b> Thay vì lựa chọn giữa Đội tuyển HSG và IELTS, tôi đã quyết định chinh phục cả hai. Kết quả là tôi đã hoàn thành cơ bản mục tiêu với Giải Ba cấp Tỉnh và giải Khuyến khích cấp trường.</p>
+                    <div class="img-item">
+                        <img src="https://i.postimg.cc/CLq8s5qH/z7370257220092-15b259aefa26c4fe834e56c73ba58d16.jpg" alt="Thành tích học sinh giỏi">
+                        <p class="img-caption">Giải Ba HSG cấp Tỉnh và giải Khuyến khích cấp trường</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">Mục tiêu và ước mơ <i class="fas fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <span class="section-title">4. Mục tiêu và ước mơ</span>
+                    <p class="normal-text"><b>📍 Mục tiêu 2025 - 2026:</b> Chinh phục các kỳ thi HSA, SPT và Tốt nghiệp THPT.</p>
+                    <p class="normal-text">Quyết tâm đặt chân vào Đại học Sư phạm Hà Nội (HNUE) – Nguyện vọng 1 mà tôi hằng mong ước.</p>
+                    <div class="img-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRJEkEGchWdl19u9VnI_Z7Iq27LHnFQfetug&s" alt="Đại học Sư phạm Hà Nội">
+                        <p class="img-caption">Nguyện vọng 1: Đại học Sư phạm Hà Nội</p>
+                    </div>
+                    <p class="normal-text"><b>👩‍🏫 Tầm nhìn dài hạn:</b> Trở thành một Giáo viên.</p>
+<div style="text-align: center;">
+    <video width="360" controls style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <source src="Download (31).mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ xem video này.
+    </video>
+</div>
+                    <p class="normal-text">Khát vọng truyền đạt tri thức, dùng khả năng tư duy và sự nhiệt huyết để dìu dắt các thế hệ học sinh tương lai.</p>
+                    <p class="normal-text"><b>✨ Tuyên ngôn quyết tâm:</b></p>
+                    <span class="decision-quote">"Cái gì là của mình thì chắc chắn là của mình, cái gì không phải của mình thì giật lấy đến kiệt sức mới thôi."</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Bùi Đức Mạnh - Lớp 12A4 - THPT Hòn Gai</p>
+    </footer>
+
+    <script>
+        // XỬ LÝ ĐÓNG MỞ MENU
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // XỬ LÝ HOA MAI, HOA ĐÀO BAY LƠ LỬNG
+        const flowers = ['🌸', '💮', '🌼']; // Hoa đào, hoa mai
+        const flowerContainer = document.getElementById('flower-container');
+        const numFlowers = 50; // Số lượng cánh hoa
+
+        for (let i = 0; i < numFlowers; i++) {
+            createFlower();
+        }
+
+        function createFlower() {
+            const flowerEl = document.createElement('div');
+            flowerEl.className = 'flower-petal';
+            flowerEl.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            
+            // Vị trí và tốc độ ngẫu nhiên
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * window.innerHeight;
+            let duration = Math.random() * 10 + 5; // Thời gian rơi (5-15 giây)
+            let delay = Math.random() * 5; // Độ trễ ban đầu
+            let size = Math.random() * 15 + 15; // Kích thước hoa (15px-30px)
+
+            flowerEl.style.left = x + 'px';
+            flowerEl.style.top = y + 'px';
+            flowerEl.style.animationDuration = duration + 's';
+            flowerEl.style.animationDelay = delay + 's';
+            flowerEl.style.fontSize = size + 'px';
+            
+            flowerContainer.appendChild(flowerEl);
+        }
+    </script>
+</body>
+</html>
